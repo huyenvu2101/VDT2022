@@ -19,7 +19,7 @@ def get():
 def get_all():
     try:
         attendees = db.attendees.find()
-        return dumps("huhu")
+        return dumps(attendees)
     except Exception as e:
         return dumps({'error' : str(e)})
 

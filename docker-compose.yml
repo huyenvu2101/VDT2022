@@ -1,0 +1,38 @@
+version: '3'
+networks:
+  web-server:
+    name: web-server
+services:
+  frontend:
+    build: frontend
+    volumes:
+      - ./nginx.conf:/tmp/nginx.conf
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+    networks:
+      - web-server
+
+  backend:
+    build: backend
+    volumes:
+      - ./backend:/src
+    ports: 
+      - 1000:1000
+    expose:
+      - "1000"
+    depends_on:
+      - mongo
+    networks:
+      - web-server
+
+  mongo:
+    image: mongo:5.0
+    ports:
+      - '27017'
+    volumes:
+      - ./db:/data/db
+    networks:
+      - web-server
+      # - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js

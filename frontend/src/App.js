@@ -4,7 +4,7 @@ function App() {
 
   const [attendees, setAttendees] = useState([])
 
-  const url = `http://localhost:1000/get_all`
+  const url = `http://localhost:5000/get_all`
 
   useLayoutEffect(() => {
     ;

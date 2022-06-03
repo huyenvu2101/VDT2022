@@ -6,7 +6,7 @@ services:
   frontend:
     build: frontend
     volumes:
-      - ./nginx.conf:/tmp/nginx.conf
+      - ../volumes/nginx.conf:/tmp/nginx.conf
     ports:
       - 80:80
     depends_on:
@@ -16,23 +16,32 @@ services:
 
   backend:
     build: backend
+    image: web-server:backend
     volumes:
-      - ./backend:/src
+      - ../volumes/backend:/src
+    command:
+      - /bin/bash
+      - -c
+      - |
+        python3 -m flask run -h 0.0.0.0
     ports: 
-      - 1000:1000
+      - 5000:5000
     expose:
-      - "1000"
+      - "5000"
     depends_on:
       - mongo
     networks:
       - web-server
+    restart: always
+    extra_hosts:
+      - "dockerhost:host-gateway"
 
   mongo:
     image: mongo:5.0
     ports:
       - '27017'
     volumes:
-      - ./db:/data/db
+      - ../volumes/db:/data/db
     networks:
       - web-server
       # - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js

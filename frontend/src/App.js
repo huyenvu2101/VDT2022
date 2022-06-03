@@ -25,24 +25,30 @@ function App() {
   return (
     <div className="App">
       <h3>
-        Attendees's Informations
+      Danh sách sinh viên thực tập VDT-2022
       </h3>
       
       <div>
-        {
-          attendees.map((attendee) => (
-            <div key={attendee.stt}>
-              <ul>
-                <li>STT: {attendee.stt}</li>
-                <li>Ho va ten: {attendee.name}</li>
-                <li>Nam sinh: {attendee.yob}</li>
-                <li>Truong: {attendee.school}</li>
-                <li>Chuyen nganh: {attendee.major}</li>
-              </ul>
-              <br></br>
-            </div>
-          ))
-        }
+              <table>
+                <tr>
+                  <th>STT</th>
+                  <th>Họ và tên</th>
+                  <th>Năm sinh</th>
+                  <th>Trường</th>
+                  <th>Chuyên ngành</th>
+                </tr>
+                {
+                  attendees.map((attendee) => (
+                    <tr key={attendee.stt}>
+                      <td >{attendee.stt}</td>
+                      <td >{attendee.name}</td>
+                      <td >{attendee.yob}</td>
+                      <td >{attendee.school}</td>
+                      <td >{attendee.major}</td>
+                    </tr>
+                    ))
+                }
+                </table>
       </div>
     </div>
   );

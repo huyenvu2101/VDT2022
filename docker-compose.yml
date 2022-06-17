@@ -37,7 +37,7 @@ services:
     image: mongo:5.0
     hostname: mongo
     ports:
-      - '27017'
+      - 27017:27017
     volumes:
       - ./db/data.js:/docker-entrypoint-initdb.d/data.js
     networks:
